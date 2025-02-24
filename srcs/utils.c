@@ -6,7 +6,7 @@
 /*   By: mawako <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 01:05:24 by mawako            #+#    #+#             */
-/*   Updated: 2025/02/24 18:39:26 by mawako           ###   ########.fr       */
+/*   Updated: 2025/02/24 20:17:10 by mawako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,15 @@ void	free_split(char **split)
 	free(split);
 }
 
-char	*find_path(char **env)
+char	*find_path(char **path)
 {
-	int		i;
-	char	*path;
+	int	i;
 
 	i = 0;
-	while (env && env[i])
+	while (path[i])
 	{
-		path = ft_strnstr(env[i], "PATH=", ft_strlen(env[i]));
-		if (path)
-			return (path + 5);
+		if (!ft_strncmp(path[i], "PATH=", 5))
+			return (path[i] + 5);
 		i++;
 	}
 	return (NULL);
