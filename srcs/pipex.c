@@ -6,7 +6,7 @@
 /*   By: mawako <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 01:04:57 by mawako            #+#    #+#             */
-/*   Updated: 2025/02/24 14:40:20 by mawako           ###   ########.fr       */
+/*   Updated: 2025/02/24 19:01:37 by mawako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,21 @@ static void	command2(char **av, char **env, int fd[2])
 	exit(EXIT_FAILURE);
 }
 
+static void	check_arguments(char **av)
+{
+	int	i;
+
+	i = 1;
+	while (i < 5)
+	{
+		if (!av[i] || !*av[i])
+		{
+			exit_msg("Invalid arguments.");
+		}
+		i++;
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	int		fd[2];
@@ -74,6 +89,7 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 5)
 		help_msg();
+	check_arguments(av);
 	if (pipe(fd) == -1)
 		exit_msg("Failed to create pipe.");
 	pid1 = fork();

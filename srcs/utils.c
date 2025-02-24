@@ -6,7 +6,7 @@
 /*   By: mawako <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 01:05:24 by mawako            #+#    #+#             */
-/*   Updated: 2025/02/24 14:00:49 by mawako           ###   ########.fr       */
+/*   Updated: 2025/02/24 18:39:26 by mawako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,15 @@ int	px_execve(char *cmd_all, char **env)
 	cmds = ft_split(cmd_all, ' ');
 	if (!cmds)
 		exit_msg("Failed to split command.");
-	path = check_path(cmds[0], env);
+	if (cmds[0][0] == '/' || cmds[0][0] == '.')
+	{
+		if (access(cmds[0], X_OK) == 0)
+			path = ft_strdup(cmds[0]);
+		else
+			return (1);
+	}
+	else
+		path = check_path(cmds[0], env);
 	if (!path)
 	{
 		free_split(cmds);
