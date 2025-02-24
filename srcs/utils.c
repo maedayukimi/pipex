@@ -6,7 +6,7 @@
 /*   By: mawako <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 01:05:24 by mawako            #+#    #+#             */
-/*   Updated: 2025/02/24 12:48:27 by mawako           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:00:49 by mawako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,5 @@ int	px_execve(char *cmd_all, char **env)
 	}
 	if (execve(path, cmds, env) == -1)
 		return (-1);
-	return (-2);
+	return (0);
 }
